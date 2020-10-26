@@ -7,13 +7,17 @@ Pytorch and Torch testing code of [CartoonGAN](http://openaccess.thecvf.com/cont
 </p>
 
 ## Getting started: Anime Intro
-
+- NOTE: I'd recommend doing the conda/pip commands from Anaconda Prompt (and run it as adminstrator). I had trouble with writing permissions for those installs without the administrator run.
 - To install Pytorch 0.3, (note these will take a ludicrous amount of time). The windows version gives a lot of stuff
 - - (Windows) conda install -c peterjc123 pytorch
 - - (Mac) conda install pytorch=0.3.1 cuda90 -c pytorch
 -  Torch has likely already installed by the previous step, but if not,
 - - pip install torch
-
+- pip install torchvision
+- If you get any sort of complaint related to CUDA, you need to be running this code on a machine with an NVIDIA GPU and CUDA installed. The link to CUDA installation is here: https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html
+- - To make sure your version of torch is compiled with CUDA, run:
+- - - conda install -c pytorch torchvision cudatoolkit=10.2 pytorch
+- With all of that set up for windows, you should be set to run the commands below for testing
 ## Getting started
 
 - Linux
@@ -34,7 +38,8 @@ The original pretrained models are Torch `nngraph` models, which cannot be loade
 
 ```
 sh pretrained_model/download_pth.sh
-(If this doesn't work, you are missing the sh command. If you have git terminal installed, you can type .\pretrained_model/download_pth.sh)
+(If this doesn't work, you are missing the sh command. If you have git terminal installed, you can type .\pretrained_model/download_pth.sh.
+You may also be missing the wget command, which you can isntall and setup from this link: http://gnuwin32.sourceforge.net/packages/wget.htm)
 ```
 
 - For testing:
