@@ -14,6 +14,7 @@ Pytorch and Torch testing code of [CartoonGAN](http://openaccess.thecvf.com/cont
 -  Torch has likely already installed by the previous step, but if not,
 - - pip install torch
 - pip install torchvision
+- pip install opencv-contrib-python
 - If you get any sort of complaint related to CUDA, you need to be running this code on a machine with an NVIDIA GPU and CUDA installed. The link to CUDA installation is here: https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html
 - - To make sure your version of torch is compiled with CUDA, run:
 - - - conda install -c pytorch torchvision cudatoolkit=10.2 pytorch
