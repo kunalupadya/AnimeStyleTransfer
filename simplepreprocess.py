@@ -88,26 +88,32 @@ def master(path_to_img):
     edges = 255 - edges
     edges = cv2.cvtColor(edges,cv2.COLOR_GRAY2RGB)
 
-    h, w, c = edges.shape
-    edges = np.concatenate([edges, np.full((h, w, 1), 255, dtype=np.uint8)], axis=-1)
+    # h, w, c = edges.shape
+    # edges = np.concatenate([edges, np.full((h, w, 1), 255, dtype=np.uint8)], axis=-1)
     # white = np.all(edges == [255, 255, 255], axis=-1)
     # edges[white, -1] = 0
    
-    h2, w2, c2 = img.shape
-    img = np.concatenate([img, np.full((h2, w2, 1), 255, dtype=np.uint8)], axis=-1)
+    # h2, w2, c2 = img.shape
+    # img = np.concatenate([img, np.full((h2, w2, 1), 255, dtype=np.uint8)], axis=-1)
     # img[white, -1] = 0
 
-    
+    black = np.zeros((face_extraction[0][1][1]-face_extraction[0][1][0], face_extraction[0][1][3]-face_extraction[0][1][2], 3), np.uint8)
+    h3, w3, c3 = black.shape
+    black = np.concatenate([black, np.full((h3, w3, 1), 255, dtype=np.uint8)], axis=-1)
 
-    
-
-    # print(face_extraction[0][0])
-    # print(face_extraction[1][1])
-    # print(face_extraction[1][2])
-    # print(face_extraction[1][3])
     print(img.shape)
     print(edges.shape)
-    img[face_extraction[0][1][0]:face_extraction[0][1][1],face_extraction[0][1][2]:face_extraction[0][1][3]] = cv2.addWeighted(img[face_extraction[0][1][0]:face_extraction[0][1][1],face_extraction[0][1][2]:face_extraction[0][1][3]],0.6,edges,0.4,0)
+    print(black.shape)
+
+    for row in range(edges.shape[0]):
+        for col in range(edges.shape[1]):
+            if edges[row,col][0] == 0 and edges[row,col][1] == 0 and edges[row,col][2] == 0:
+                # print("hi")
+                img[row+(face_extraction[0][1][0]),col+(face_extraction[0][1][2])] = [0,0,0]
+
+
+    # img[face_extraction[0][1][0]:face_extraction[0][1][1],face_extraction[0][1][2]:face_extraction[0][1][3]] = cv2.addWeighted(img[face_extraction[0][1][0]:face_extraction[0][1][1],face_extraction[0][1][2]:face_extraction[0][1][3]],0.6,edges,0.4,0)
+    # img[face_extraction[0][1][0]:face_extraction[0][1][1],face_extraction[0][1][2]:face_extraction[0][1][3]] = cv2.addWeighted(img[face_extraction[0][1][0]:face_extraction[0][1][1],face_extraction[0][1][2]:face_extraction[0][1][3]],0.6,black,0.1,0)
     plt.subplot(121),plt.imshow(img)
     plt.title('New'), plt.xticks([]), plt.yticks([])
     cv2.imwrite("new.jpg", img)
